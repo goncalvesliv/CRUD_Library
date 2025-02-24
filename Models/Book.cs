@@ -4,7 +4,7 @@
     {
         public Book(string title, string author, bool available, int year)
         {
-            Title = title; Author = author; Year = year;
+            Title = title; Author = author; Year = year;  
             Available = available; Id = Guid.NewGuid();
         }
         public Guid Id { get; init; }

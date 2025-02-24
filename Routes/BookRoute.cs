@@ -21,8 +21,26 @@ namespace WebAPI_Library.Routes
             route.MapGet("", async (BookContext context) =>
             {
                 var library = await context.Library.ToListAsync();
-                return Results.Ok(library);
+                var response = new
+                {
+                    dados = library
+                };
+
+                return Results.Ok(response);
             });
+
+            route.MapGet("{id:guid}", async (Guid id, BookContext context) =>
+            {
+                var book = await context.Library.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (book == null)
+                {
+                    return Results.NotFound(new { message = "Livro não encontrado" });
+                }
+
+                return Results.Ok(new { dados = book });
+            });
+
 
             route.MapPut("{id:guid}",
                async (Guid id, BookRequest req, BookContext context) =>

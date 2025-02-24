@@ -7,6 +7,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(); 
 builder.Services.AddScoped<BookContext>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("booksApp", builder =>
+    {
+        builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -14,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("booksApp");
 
 app.BookRoutes();
 
