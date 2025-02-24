@@ -1,0 +1,11 @@
+# Ignora arquivos de build
+bin/
+obj/
+
+# Ignora arquivos de configuração do Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Ignora arquivos de usuário
+*.user
